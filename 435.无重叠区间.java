@@ -9,6 +9,7 @@ import java.util.Arrays;
 // @lc code=start
 class Solution {
     public int eraseOverlapIntervals(int[][] intervals) {
+<<<<<<< HEAD
         if (intervals.length < 2) return 0;
         Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
         int ans = 0;
@@ -51,5 +52,19 @@ class Solution {
 //         return intervals.length - count;
 //     }
 // }
+=======
+        if (intervals.length == 0) return 0;
+        Arrays.sort(intervals, (o1, o2) -> Integer.compare(o1[0], o2[0]));
+        int ans = 1;
+        for (int i = 1; i < intervals.length; i++) {
+            if (intervals[i][0] >= intervals[i - 1][1]) ans++;
+            else {
+                intervals[i][1] = Math.min(intervals[i - 1][1], intervals[i][1]);
+            }
+        }
+        return intervals.length - ans;
+    }
+}
+>>>>>>> cb5f86a (add solutions from home PC)
 // @lc code=end
 

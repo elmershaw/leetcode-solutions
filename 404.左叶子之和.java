@@ -21,6 +21,7 @@
  * }
  */
 class Solution {
+<<<<<<< HEAD
     public int sumOfLeftLeaves(TreeNode root) {
         if (root == null) return 0;
         int lv = sumOfLeftLeaves(root.left);
@@ -30,6 +31,28 @@ class Solution {
                 root.left.right == null)
             mv = root.left.val;
         return lv + rv + mv;
+=======
+    private int ans;
+    public int sumOfLeftLeaves(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        traverse(root);
+        return ans;
+    }
+
+    private void traverse(TreeNode root) {
+        if (root.left != null) {
+            if (root.left.left == null && root.left.right == null) {
+                ans += root.left.val;
+            } else {
+                traverse(root.left);
+            }
+        }
+        if (root.right != null) {
+            traverse(root.right);
+        }
+>>>>>>> cb5f86a (add solutions from home PC)
     }
 }
 // @lc code=end

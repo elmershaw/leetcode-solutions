@@ -22,6 +22,7 @@
  */
 class Solution {
     public TreeNode buildTree(int[] inorder, int[] postorder) {
+<<<<<<< HEAD
         if (inorder == null || postorder == null || inorder.length != postorder.length) 
             return null;
         return build(inorder, postorder, 0, inorder.length - 1, inorder.length - 1);
@@ -41,6 +42,28 @@ class Solution {
         root.right = build(inorder, postorder, i + 1, r, k - 1);
         return root;
         
+=======
+        return bt(inorder, 0, inorder.length - 1, postorder, 0, inorder.length - 1);
+    }
+
+    private TreeNode bt(int[] inorder, int l, int r, int[] postorder, int head, int tail) {
+        if (l > r) {
+            return null;
+        }
+        TreeNode root = new TreeNode(postorder[tail]);
+        if (l == r) {
+            return root;
+        }
+        int i = l;
+        for (; i <= r; i++) {
+            if (inorder[i] == postorder[tail]) {
+                break;
+            }
+        }
+        root.left = bt(inorder, l, i - 1, postorder, head, head + i - 1 - l);
+        root.right = bt(inorder, i + 1, r, postorder, head + i - l, tail - 1);
+        return root;
+>>>>>>> cb5f86a (add solutions from home PC)
     }
 }
 // @lc code=end

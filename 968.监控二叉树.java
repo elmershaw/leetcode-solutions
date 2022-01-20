@@ -21,6 +21,7 @@
  * }
  */
 class Solution {
+<<<<<<< HEAD
     public int minCameraCover(TreeNode root) {
         traversal(root, false);
     }
@@ -29,6 +30,26 @@ class Solution {
         if (root == null) {return;}
         if (!monitered) {
             
+=======
+    private int ans;
+
+    public int minCameraCover(TreeNode root) {
+        if (traverse(root) == 0) ans++;
+        return ans;
+    }
+
+    private int traverse(TreeNode root) {
+        if (root == null) return 2;
+        int l = traverse(root.left);
+        int r = traverse(root.right);
+        if (l * r == 0) {
+            ans++;
+            return 1;
+        } else if (l == 1 || r == 1) {
+            return 2;
+        } else {
+            return 0;
+>>>>>>> cb5f86a (add solutions from home PC)
         }
     }
 }

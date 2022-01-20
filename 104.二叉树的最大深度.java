@@ -21,10 +21,33 @@
  * }
  */
 class Solution {
+<<<<<<< HEAD
     public int maxDepth(TreeNode root) {
         if (root == null) return 0;
         return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
     }
+=======
+    // private int ans;
+
+    public int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
+    }
+
+    // private void traverse(TreeNode root, int depth) {
+    //     if (root == null) {
+    //         return;
+    //     }
+    //     if (++depth > ans) {
+    //         ans = depth;
+    //     }
+    //     traverse(root.left, depth);
+    //     traverse(root.right, depth);
+    //     return;
+    // }
+>>>>>>> cb5f86a (add solutions from home PC)
 }
 // @lc code=end
 

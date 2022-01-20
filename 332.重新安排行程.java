@@ -1,10 +1,24 @@
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
+=======
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeMap;
+>>>>>>> cb5f86a (add solutions from home PC)
 
 /*
  * @lc app=leetcode.cn id=332 lang=java

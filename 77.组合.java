@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 import java.util.ArrayList;
+=======
+>>>>>>> cb5f86a (add solutions from home PC)
 import java.util.List;
 
 /*
@@ -9,6 +12,7 @@ import java.util.List;
 
 // @lc code=start
 class Solution {
+<<<<<<< HEAD
     public List<List<Integer>> combine(int n, int k) {
         List<List<Integer>> ans = new ArrayList<>();
         traversal(n, k, 1, ans, new ArrayList<Integer>());
@@ -29,6 +33,29 @@ class Solution {
             list.remove(Integer.valueOf(j));
         }
         //list.remove(Integer.valueOf(i));
+=======
+    private List<List<Integer>> ans;
+    private List<Integer> tmp;
+
+    public List<List<Integer>> combine(int n, int k) {
+        ans = new ArrayList<>();
+        tmp = new ArrayList<>();
+        traceBack(n, k, 1);
+        return ans;
+    }
+
+    private void traceBack(int n, int k, int x) {
+        if (tmp.size() == k) {
+            ans.add(new ArrayList<>(tmp));
+            // tmp.clear();
+            return;
+        }
+        for (int i = x; k - tmp.size() <= n - i + 1; i++) {
+            tmp.add(i);
+            traceBack(n, k, i + 1);
+            tmp.remove(Integer.valueOf(i));
+        }
+>>>>>>> cb5f86a (add solutions from home PC)
     }
 }
 // @lc code=end

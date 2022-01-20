@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 import java.util.Arrays;
 
+=======
+>>>>>>> cb5f86a (add solutions from home PC)
 /*
  * @lc app=leetcode.cn id=844 lang=java
  *
@@ -8,6 +11,7 @@ import java.util.Arrays;
 
 // @lc code=start
 class Solution {
+<<<<<<< HEAD
     public boolean backspaceCompare(String s, String t) {
         int sCounts = 0;
         int tCounts = 0;
@@ -49,6 +53,48 @@ class Solution {
             return true;
         }
         return false;
+=======
+    public boolean backspaceCompare(String S, String T) {
+        int i = S.length() - 1, j = T.length() - 1;
+        int skipS = 0, skipT = 0;
+
+        while (i >= 0 || j >= 0) {
+            while (i >= 0) {
+                if (S.charAt(i) == '#') {
+                    skipS++;
+                    i--;
+                } else if (skipS > 0) {
+                    skipS--;
+                    i--;
+                } else {
+                    break;
+                }
+            }
+            while (j >= 0) {
+                if (T.charAt(j) == '#') {
+                    skipT++;
+                    j--;
+                } else if (skipT > 0) {
+                    skipT--;
+                    j--;
+                } else {
+                    break;
+                }
+            }
+            if (i >= 0 && j >= 0) {
+                if (S.charAt(i) != T.charAt(j)) {
+                    return false;
+                }
+            } else {
+                if (i >= 0 || j >= 0) {
+                    return false;
+                }
+            }
+            i--;
+            j--;
+        }
+        return true;
+>>>>>>> cb5f86a (add solutions from home PC)
     }
 }
 // @lc code=end

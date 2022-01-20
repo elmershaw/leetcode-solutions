@@ -31,21 +31,35 @@ class Solution {
             }
             res = Math.max(res, firSum + secSum);
             if (fruits[i - 1] == fir) {
+<<<<<<< HEAD
                 firSum = i - 1 - firp + 1;
+=======
+                firSum = i - firp;
+>>>>>>> cb5f86a (add solutions from home PC)
                 sec = fruits[i];
                 secSum = 1;
                 secp = i;
             } else {
+<<<<<<< HEAD
                 secSum = i - 1 - secp + 1;
+=======
+                secSum = i - secp;
+>>>>>>> cb5f86a (add solutions from home PC)
                 fir = fruits[i];
                 firSum = 1;
                 firp = i;
             }
         }
+<<<<<<< HEAD
         //if (res == 0) return n;
+=======
+>>>>>>> cb5f86a (add solutions from home PC)
         res = Math.max(res, firSum + secSum);
         return res;
     }
 }
 // @lc code=end
+<<<<<<< HEAD
 
+=======
+>>>>>>> cb5f86a (add solutions from home PC)

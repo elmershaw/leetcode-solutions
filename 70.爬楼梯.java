@@ -7,6 +7,7 @@
 // @lc code=start
 class Solution {
     public int climbStairs(int n) {
+<<<<<<< HEAD
         //dp[i] = ways to get to step i
         //dp[i] = dp[i - 1] + dp[i - 2]
         //dp[0] = 1, dp[1] = 1
@@ -19,6 +20,18 @@ class Solution {
             first = tmp;
         }
         return second;
+=======
+        int[] dp = new int[n + 1];
+        if (n == 0) {
+            return 1;
+        }
+        dp[0] = 1;
+        dp[1] = 1;
+        for (int i = 2; i < dp.length; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2];
+        }
+        return dp[n];
+>>>>>>> cb5f86a (add solutions from home PC)
     }
 }
 // @lc code=end

@@ -9,6 +9,7 @@ import java.util.List;
 
 // @lc code=start
 class Solution {
+<<<<<<< HEAD
     List<String> result = new ArrayList<>();
 
     public List<String> restoreIpAddresses(String s) {
@@ -35,10 +36,37 @@ class Solution {
                 s = s.substring(0, i + 1) + s.substring(i + 2);// 回溯删掉逗点
             } else {
                 break;
+=======
+    private List<String> ans;
+    private StringBuilder sb;
+
+    public List<String> restoreIpAddresses(String s) {
+        ans = new ArrayList<>();
+        sb = new StringBuilder();
+        backtracking(s, 0, 0);
+        return ans;
+    }
+
+    private void backtracking(String s, int index, int size) {
+        if (size == 3) {
+            if (isValid(s, index, s.length() - 1)) {
+                ans.add(sb.toString() + s.substring(index, s.length()));
+            }
+            return;
+        }
+        for (int i = index; i < s.length(); i++) {
+            if (isValid(s, index, i)) {
+                String t = s.substring(index, i + 1) + '.';
+                sb.append(t);
+                // System.out.println(sb.toString());
+                backtracking(s, i + 1, size + 1);
+                sb.delete(sb.length() - (i + 2 - index), sb.length());
+>>>>>>> cb5f86a (add solutions from home PC)
             }
         }
     }
 
+<<<<<<< HEAD
     // 判断字符串s在左闭⼜闭区间[start, end]所组成的数字是否合法
     private Boolean isValid(String s, int start, int end) {
         if (start > end) {
@@ -54,6 +82,20 @@ class Solution {
             }
             num = num * 10 + (s.charAt(i) - '0');
             if (num > 255) { // 如果⼤于255了不合法
+=======
+    private boolean isValid(String s, int l, int r) {
+        if (l > r) return false;
+        if (s.charAt(l) == '0' && r != l) {
+            return false;
+        }
+        int value = 0;
+        for (int i = l; i <= r; i++) {
+            if (s.charAt(i) < '0' || s.charAt(i) > '9') {
+                return false;
+            }
+            value = value * 10 + s.charAt(i) - '0';
+            if (value > 255) {
+>>>>>>> cb5f86a (add solutions from home PC)
                 return false;
             }
         }

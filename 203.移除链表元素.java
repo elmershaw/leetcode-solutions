@@ -17,6 +17,7 @@
  */
 class Solution {
     public ListNode removeElements(ListNode head, int val) {
+<<<<<<< HEAD
         if (head == null) return head;
         ListNode dummy = new ListNode(0, head);
         ListNode cursor = dummy;
@@ -26,6 +27,16 @@ class Solution {
                 continue;
             }
             cursor = cursor.next;
+=======
+        ListNode dummy = new ListNode(-1, head);
+        ListNode cursor = dummy;
+        while (cursor.next != null) {
+            if (cursor.next.val == val) {
+                cursor.next = cursor.next.next;
+            } else {
+                cursor = cursor.next;
+            }
+>>>>>>> cb5f86a (add solutions from home PC)
         }
         return dummy.next;
     }

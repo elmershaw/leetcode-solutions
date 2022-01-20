@@ -4,10 +4,16 @@ import java.util.Arrays;
  * @lc app=leetcode.cn id=1423 lang=java
  *
  * [1423] 可获得的最大点数
+<<<<<<< HEAD
+=======
+ * 
+ * Solution: Slide Window
+>>>>>>> cb5f86a (add solutions from home PC)
  */
 
 // @lc code=start
 class Solution {
+<<<<<<< HEAD
     private int[] calculated;
     private int bitmask = 0;
     private int bitmaskLength;
@@ -55,6 +61,20 @@ class Solution {
 
     private void pick(int bit, int k) {
         bitmask |= bit << (bitmaskLength - k);
+=======
+    public int maxScore(int[] cardPoints, int k) {
+        int n = cardPoints.length;
+        int sum = 0;
+        for (int i = 0; i < k; i++) {
+            sum += cardPoints[i];
+        }
+        int ans = sum;
+        for (int j = 0; j < k; j++) {
+            sum = sum - cardPoints[k - j - 1] + cardPoints[n - 1 - j];
+            ans = Math.max(ans, sum);
+        }
+        return ans;
+>>>>>>> cb5f86a (add solutions from home PC)
     }
 }
 // @lc code=end

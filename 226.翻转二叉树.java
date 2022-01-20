@@ -22,12 +22,23 @@
  */
 class Solution {
     public TreeNode invertTree(TreeNode root) {
+<<<<<<< HEAD
         if (root == null) return root;
         TreeNode tmp = root.left;
         root.left = root.right;
         root.right = tmp;
         invertTree(root.left);
         invertTree(root.right);
+=======
+        if (root == null) {
+            return null;
+        }
+        invertTree(root.left);
+        invertTree(root.right);
+        TreeNode tmp = root.left;
+        root.left = root.right;
+        root.right = tmp;
+>>>>>>> cb5f86a (add solutions from home PC)
         return root;
     }
 }

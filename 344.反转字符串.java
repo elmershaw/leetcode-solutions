@@ -10,12 +10,18 @@ class Solution {
         int l = 0;
         int r = s.length - 1;
         while (l < r) {
+<<<<<<< HEAD
             // char tmp = s[l];
             // s[l] = s[r];
             // s[r] = tmp;
             s[l] ^= s[r];
             s[r] ^= s[l];
             s[l] ^= s[r];
+=======
+            char tmp = s[l];
+            s[l] = s[r];
+            s[r] = tmp;
+>>>>>>> cb5f86a (add solutions from home PC)
             l++;
             r--;
         }

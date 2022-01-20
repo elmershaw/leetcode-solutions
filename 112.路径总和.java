@@ -21,6 +21,7 @@
  * }
  */
 class Solution {
+<<<<<<< HEAD
     int target;
 
     public boolean hasPathSum(TreeNode root, int targetSum) {
@@ -38,6 +39,24 @@ class Solution {
             return find(root.left, tmpSum) | find(root.right, tmpSum);
         }
 
+=======
+    private int sum;
+
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+        if (root == null) {
+            return false;
+        }
+        if (root.left == null && root.right == null) {
+            if (sum + root.val == targetSum) {
+                return true;
+            }
+            return false;
+        }
+        sum += root.val;
+        boolean res = hasPathSum(root.left, targetSum) | hasPathSum(root.right, targetSum);
+        sum -= root.val;
+        return res;
+>>>>>>> cb5f86a (add solutions from home PC)
     }
 }
 // @lc code=end

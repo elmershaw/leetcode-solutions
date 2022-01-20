@@ -7,6 +7,7 @@
 // @lc code=start
 class Solution {
     public int lastStoneWeightII(int[] stones) {
+<<<<<<< HEAD
         int sum = Arrays.stream(stones).sum();
         int target = sum >> 1;;
         int[] dp = new int[target + 1];
@@ -19,6 +20,18 @@ class Solution {
             System.out.println(integer);
         }
         return sum - dp[target];
+=======
+        //int[] dp = new int[1501];
+        int sum = Arrays.stream(stones).sum();
+        int target = sum >> 1;
+        int[] dp = new int[target + 1];
+        for (int i = 0; i < stones.length; i++) {
+            for (int j = target; j >= stones[i]; j--) {
+                dp[j] = Math.max(dp[j], dp[j - stones[i]] + stones[i]);
+            }
+        }
+        return sum - dp[target] - dp[target];
+>>>>>>> cb5f86a (add solutions from home PC)
     }
 }
 // @lc code=end

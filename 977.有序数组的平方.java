@@ -7,6 +7,7 @@
 // @lc code=start
 class Solution {
     public int[] sortedSquares(int[] nums) {
+<<<<<<< HEAD
         if (nums == null || nums.length == 0) return nums;
         int[] ans = new int[nums.length];
         int l = 0;
@@ -36,6 +37,21 @@ class Solution {
             r++;
         }
         return ans;
+=======
+        int[] res = new int[nums.length];
+        int l = 0;
+        int r = nums.length - 1;
+        for (int i = nums.length - 1; i >= 0; i--) {
+            if (nums[l] * nums[l] > nums[r] * nums[r]) {
+                res[i] = nums[l] * nums[l];
+                l++;
+            } else {
+                res[i] = nums[r] * nums[r];
+                r--;
+            }
+        }
+        return res;
+>>>>>>> cb5f86a (add solutions from home PC)
     }
 }
 // @lc code=end

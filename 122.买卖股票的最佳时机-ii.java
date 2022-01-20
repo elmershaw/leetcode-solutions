@@ -7,6 +7,7 @@
 // @lc code=start
 class Solution {
     public int maxProfit(int[] prices) {
+<<<<<<< HEAD
         int profit = 0;
         // int tmp = 0;
         int buyPrice = prices[0];
@@ -22,3 +23,21 @@ class Solution {
 }
 // @lc code=end
 
+=======
+        int profits = 0;
+        int l = 0;
+        int tmp = 0;
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] > prices[i - 1]) {
+                tmp = prices[i] - prices[l];
+            } else {
+                profits += tmp;
+                l = i;
+                tmp = 0;
+            }
+        }
+        return profits + tmp;
+    }
+}
+// @lc code=end
+>>>>>>> cb5f86a (add solutions from home PC)
