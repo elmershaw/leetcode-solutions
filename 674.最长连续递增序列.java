@@ -7,20 +7,24 @@
 // @lc code=start
 class Solution {
     public int findLengthOfLCIS(int[] nums) {
-        //int[] dp = new int[nums.length];
-        int res = 1;
-        // Arrays.fill(dp, 1);
-        int dp = 1;
-        for (int i = 1; i < nums.length; i++) {
+        int n = nums.length;
+        // int[] dp = new int[n];
+        // dp[i] = dp[i - 1] + 1 (if nums[i] > nums[i - 1])
+        // dp[i] = 1 (else)
+        // dp[0] = 1;
+        int l = 1;
+        int ans = 1;
+        for (int i = 1; i < n; i++) {
             if (nums[i] > nums[i - 1]) {
-                dp += 1;
+                // dp[i] = dp[i - 1] + 1;
+                l++;
             } else {
-                dp = 1;
+                // dp[i] = 1;
+                l = 1;
             }
-
-            res = Math.max(res, dp);
+            ans = Math.max(ans, l);
         }
-        return res;
+        return ans;
     }
 }
 // @lc code=end

@@ -7,32 +7,27 @@
 // @lc code=start
 class Solution {
     public boolean isSubsequence(String s, String t) {
-        int n1 = s.length();
-        int n2 = t.length();
-        //DP
-        // int[][] dp = new int[n1 + 1][n2 + 1];
-        // for (int i = 1; i <= n1; i++) {
-        //     for (int j = i; j <= n2; j++) {
-        //         if (s.charAt(i - 1) == t.charAt(j - 1)) {
-        //             dp[i][j] = dp[i - 1][j - 1] + 1;
-        //         } else {
-        //             dp[i][j] = dp[i][j - 1];
-        //         }
-        //     }
-        // }
-        // return dp[n1][n2] == s.length();
-        if (s.length() == 0) {
-            return true;
+        int n = t.length();
+        int m = s.length();
+        boolean[][] dp = new boolean[m + 1][n + 1];
+        // dp[i][j] = s.sub(0, i - 1) is a subsequence of t.sub(0, j - 1) 
+        // if s[i] == t[j]
+        // dp[i][j] = dp[i - 1][j - 1]
+        // else
+        // dp[i][j] = dp[i][j - 1]
+        for (int j = 0; j <=n ; j++) {
+            dp[0][j] = true;
         }
-        int j = 0;
-        for (int i = 0; i < n2; i++) {
-            if (t.charAt(i) == s.charAt(j)) {
-                if (++j == n1) {
-                    return true;
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (s.charAt(i - 1) == t.charAt(j - 1)) {
+                    dp[i][j] = dp[i - 1][j - 1];
+                } else {
+                    dp[i][j] = dp[i][j - 1];
                 }
             }
         }
-        return false;
+        return dp[m][n];
     }
 }
 // @lc code=end
