@@ -10,15 +10,15 @@ import java.util.Deque;
 // @lc code=start
 class Solution {
     public int[] dailyTemperatures(int[] temperatures) {
-        int[] ans = new int[temperatures.length];
+        int n = temperatures.length;
+        int[] ans = new int[n];
         Deque<Integer> stack = new ArrayDeque<>();
-        for (int i = 0; i < temperatures.length; i++) {
-            while (stack.size() > 0 && temperatures[i] > temperatures[stack.peek()]) {
-                int index = stack.pop();
-                ans[index] = i - index;
+        stack.push(0);
+        for (int i = 1; i < n; i++) {
+            while (!stack.isEmpty() && temperatures[i] > temperatures[stack.peek()]) {
+                ans[stack.peek()] = i - stack.pop();
             }
             stack.push(i);
-            // System.out.println(stack.toString());
         }
         return ans;
     }

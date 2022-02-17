@@ -1,3 +1,5 @@
+import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Deque;
 
 /*
@@ -9,26 +11,36 @@ import java.util.Deque;
 // @lc code=start
 class Solution {
     public int trap(int[] height) {
-        //Deque<Integer> stack = new ArrayDeque<>();
         int n = height.length;
         int[] lToR = new int[n];
         int[] rToL = new int[n];
-
+        // Arrays.fill(lToR, -1);
+        // Arrays.fill(rToL, -1);
+        Deque<Integer> stack = new ArrayDeque<>();
+        int max = 0;
+        rToL[0] = height[0];
         for (int i = 1; i < n; i++) {
-            lToR[i] = Math.max(height[i - 1], lToR[i - 1]);
+            // while (!stack.isEmpty() && height[i] > height[stack.peek()]) {
+            //     lToR[stack.pop()] = i;
+            // }
+            // stack.push(i);
+            rToL[i] = Math.max(rToL[i - 1], height[i]);
         }
         // stack.clear();
+        lToR[n - 1] = height[n - 1];
         for (int j = n - 2; j >= 0; j--) {
-            rToL[j] = Math.max(height[j + 1], rToL[j + 1]);
+            // while (!stack.isEmpty() && height[j] > height[stack.peek()]) {
+            //     rToL[stack.pop()] = j;
+            // }
+            // stack.push(j);
+            lToR[j] = Math.max(lToR[j + 1], height[j]);
         }
-        int res = 0;
-        for (int k = 0; k < n; k++) {
-            int tmp = Math.min(lToR[k], rToL[k]) - height[k]; 
-            if (tmp > 0) {
-                res += tmp;
-            }
+        int ans = 0;
+        for (int m = 1; m < n - 1; m++) {
+            int tmp = Math.min(lToR[m], rToL[m]) - height[m];
+            if (tmp > 0) ans += tmp;
         }
-        return res;
+        return ans;
     }
 }
 // @lc code=end

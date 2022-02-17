@@ -17,27 +17,28 @@
  */
 class Solution {
     public boolean isPalindrome(ListNode head) {
-        ListNode slow = head;
-        ListNode fast = head;
-        int times = 0;
-        while (fast != null && fast.next != null) {
-            times++;
-            slow = slow.next;
-            fast = fast.next.next;
+        int n = 0;
+        ListNode cursor = head;
+        while (cursor != null) {
+            n++;
+            cursor = cursor.next;
         }
-        ListNode proc = slow.next;
-        while (slow != null && proc != null) {
-            ListNode tmp = proc.next;
-            proc.next = slow;
-            slow = proc;
-            proc = tmp;
+        if (n <= 1) return true;
+        int h = n >> 1;
+        cursor = head;
+        ListNode prev = null;
+        ListNode right = null;
+        while (h-- > 0) {
+            right = cursor.next;
+            cursor.next = prev;
+            prev = cursor;
+            cursor = right;
         }
-        for (int i = 0; i < times; i++) {
-            if (head.val != slow.val) {
-                return false;
-            }
-            head = head.next;
-            slow = slow.next;
+        if (n % 2 == 1) right = right.next;
+        while (prev != null) {
+            if (prev.val != right.val) return false;
+            prev = prev.next;
+            right = right.next;
         }
         return true;
     }

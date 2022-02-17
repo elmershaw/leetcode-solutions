@@ -11,23 +11,17 @@ import java.util.Deque;
 // @lc code=start
 class Solution {
     public int[] nextGreaterElements(int[] nums) {
-        // int[] rotateNums = new int[nums.length * 2];
-        int[] ans = new int[nums.length];
+        int n = nums.length;
+        int[] ans = new int[n];
         Arrays.fill(ans, -1);
-        //Arrays.copyOfRange();
-        // for (int i = 0; i < nums.length; i++) {
-        //     rotateNums[i] = nums[i];
-        //     rotateNums[i + nums.length] = nums[i];
-        // }
         Deque<Integer> stack = new ArrayDeque<>();
-        for (int j = 0; j < nums.length * 2; j++) {
-            while (!stack.isEmpty() && nums[j % nums.length] > nums[stack.peek()]) {
-                int index = stack.pop();
-                ans[index] = nums[j % nums.length];
+        // stack.push(nums[0]);
+        for (int i = 0; i < 2 * n; i++) {
+            int idx = i % n;
+            while (!stack.isEmpty() && nums[idx] > nums[stack.peek()]) {
+                ans[stack.pop()] = nums[idx];
             }
-            if (j < nums.length) {
-                stack.push(j);
-            }
+            stack.push(idx);
         }
         return ans;
     }

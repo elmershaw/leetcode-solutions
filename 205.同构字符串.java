@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 /*
@@ -11,41 +12,11 @@ import java.util.Map;
 class Solution {
     public boolean isIsomorphic(String s, String t) {
         Map<Character, Character> map = new HashMap<>();
-        // int[] sMap = new int[26];
-        // Arrays.fill(sMap, -1);
-        // int[] tMap = new int[26];
-        // Arrays.fill(tMap, -1);
         for (int i = 0; i < s.length(); i++) {
-            Character cFromS = map.getOrDefault(s.charAt(i), null);
-            Character cFromT = map.getOrDefault(t.charAt(i), null);
-            // System.out.println(cFromS);
-            // System.out.println(cFromT);
-            if (cFromS == null && cFromT == null) {
-                map.put(s.charAt(i), t.charAt(i));
-                map.put(t.charAt(i), s.charAt(i));
-            } else if (cFromS != null && cFromT != null) {
-                if (cFromS != t.charAt(i) || cFromT != s.charAt(i)) {
-                    return false;
-                }
-            } else {
+            if (map.containsKey(s.charAt(i)) && map.get(s.charAt(i)) != t.charAt(i)) {
                 return false;
             }
-            // if (cFromS != t.charAt(i) || cFromT != s.charAt(i)) {
-            //     return false;
-            // }
-            
-            // int sIdx = s.charAt(i) - 'a';
-            // int tIdx = t.charAt(i) - 'a';
-            // if (sMap[sIdx] == -1 && tMap[tIdx] == -1) {
-            //     sMap[sIdx] = tIdx;
-            //     tMap[tIdx] = sIdx;
-            // } else if (sMap[sIdx] != -1 && tMap[tIdx] != -1) {
-            //     if (sMap[sIdx] != tIdx || tMap[tIdx] != sIdx) {
-            //         return false;
-            //     }
-            // } else {
-            //     return false;
-            // }
+            map.put(s.charAt(i), t.charAt(i));
         }
         return true;
     }
