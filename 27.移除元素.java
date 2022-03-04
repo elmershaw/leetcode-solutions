@@ -7,28 +7,15 @@
 // @lc code=start
 class Solution {
     public int removeElement(int[] nums, int val) {
-<<<<<<< HEAD
-        int slowPointer = 0;
-        
-        for (int fastPointer = 0; fastPointer < nums.length; fastPointer++) {
-            if (nums[fastPointer] != val) {
-                nums[slowPointer] = nums[fastPointer];
-                slowPointer++;
-            }
-        }
-        return slowPointer;
-=======
-        int slow = 0;
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] == val) {
+        int i = 0;
+        for (int j = 0; j < nums.length; j++) {
+            if (nums[j] == val) {
                 continue;
             }
-            nums[slow] = nums[i];
-            slow++;
+            nums[i] = nums[j];
+            i++;
         }
-        return slow;
->>>>>>> cb5f86a (add solutions from home PC)
+        // System.out.println(i);
+        return i;
     }
 }
-// @lc code=end
-

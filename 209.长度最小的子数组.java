@@ -7,42 +7,17 @@
 // @lc code=start
 class Solution {
     public int minSubArrayLen(int target, int[] nums) {
-<<<<<<< HEAD
-        if (nums == null || nums.length == 0) return 0;
-        int l = 0, r = 0;
-        int windowSum = nums[0];
-        int ans = nums.length + 1;
-        while (true) {
-            if (windowSum >= target) {
-                ans = Math.min(r - l + 1, ans);
-                windowSum -= nums[l];
-                l++;
-                if (l >= nums.length) break;
-            } else {
-                r++;
-                if (r >= nums.length) break;
-                windowSum += nums[r]; 
-            }
-        }
-        if (ans > nums.length) return 0;
-        return ans;
-=======
-        int l = 0;
-        int r = 0;
         int sum = 0;
-        int ans = Integer.MAX_VALUE;
-        while ((r < nums.length || sum >= target) && l < nums.length) {
-            if (sum >= target) {
-                ans = Math.min(ans, r - l);
-                sum -= nums[l];
-                l++;
-            } else {
-                sum += nums[r];
-                r++;
+        int l = 0;
+        int ans = nums.length;
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            while (sum >= target) {
+                ans = Math.min(ans, i - l);
+                sum -= nums[l++];
             }
         }
-        return ans == Integer.MAX_VALUE ? 0 : ans;
->>>>>>> cb5f86a (add solutions from home PC)
+        return l == 0 ? 0 : ans + 1;
     }
 }
 // @lc code=end

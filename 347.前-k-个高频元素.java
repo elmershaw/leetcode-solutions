@@ -13,23 +13,20 @@ import java.util.TreeMap;
 // @lc code=start
 class Solution {
     public int[] topKFrequent(int[] nums, int k) {
-        int[] ans = new int[k];
-        Map<Integer, Integer> freq = new HashMap<>();
+        Map<Integer, Integer> map = new HashMap<>();
         for (int i : nums) {
-            freq.compute(i, (key ,v) -> v == null ? 1 : v + 1);
+            map.compute(i, (key, v) -> v == null ? 1 : v + 1);
         }
-        Queue<Map.Entry<Integer, Integer>> queue = new PriorityQueue<>(k, (e1, e2) -> Integer.compare(e1.getValue(), e2.getValue()));
-        for (Map.Entry<Integer, Integer> e : freq.entrySet()) {
-            queue.offer(e);
-            if (queue.size() > k) {
-                queue.poll();
+        PriorityQueue<Map.Entry<Integer, Integer>> pq = new PriorityQueue<>(k, (a, b) -> a.getValue() - b.getValue());
+        for (Map.Entry<Integer, Integer> e : map.entrySet()) {
+            if (pq.size() == k && e.getValue() > pq.peek().getValue()) {
+                pq.poll();
+                pq.offer(e);
             }
+            if (pq.size() < k) pq.offer(e);
         }
-        int i = 0;
-        while (!queue.isEmpty()) {
-            ans[i++] = queue.poll().getKey();
-        }
-        return ans;
+        // System.out.println(pq.toString());
+        return pq.stream().mapToInt(i -> i.getKey()).toArray();
     }
 }
 // @lc code=end

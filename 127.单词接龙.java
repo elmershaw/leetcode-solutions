@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -11,34 +12,45 @@ import java.util.Set;
 // @lc code=start
 class Solution {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
-        HashSet<String> wordSet = new HashSet<>(wordList); //转换为hashset 加快速度
-        if (wordSet.size() == 0 || !wordSet.contains(endWord)) {  //特殊情况判断
-            return 0;
-        }
-        Queue<String> queue = new LinkedList<>(); //bfs 队列
-        queue.offer(beginWord);
-        Map<String, Integer> map = new HashMap<>(); //记录单词对应路径长度
-        map.put(beginWord, 1);
-    
-        while (!queue.isEmpty()) {
-            String word = queue.poll(); //取出队头单词
-            int path  = map.get(word); //获取到该单词的路径长度
-            for (int i = 0; i < word.length(); i++) { //遍历单词的每个字符
-                char[] chars = word.toCharArray(); //将单词转换为char array，方便替换
-                for (char k = 'a'; k <= 'z'; k++) { //从'a' 到 'z' 遍历替换
-                    chars[i] = k; //替换第i个字符
-                    String newWord = String.valueOf(chars); //得到新的字符串
-                    if (newWord.equals(endWord)) {  //如果新的字符串值与endWord一致，返回当前长度+1
-                        return path + 1;
+        // Map<String, List<String>> map = new HashMap<>();
+        Set<String> dict = new HashSet<>(wordList);
+        if (!dict.contains(endWord)) return 0;
+        // System.out.println("x");
+        Set<String> q1 = new HashSet<>();
+        Set<String> q2 = new HashSet<>();
+        q1.add(beginWord);
+        q2.add(endWord);
+
+        int l = beginWord.length();
+        int step = 0;
+        while (!q1.isEmpty() && !q2.isEmpty()) {
+            step++;
+            if (q1.size() > q2.size()) {
+                Set<String> t = q1;
+                q1 = q2;
+                q2 = t;
+            }
+            Set<String> tmp = new HashSet<>();
+            for (String s : q1) {
+                char[] ca = s.toCharArray();
+                for (int i = 0; i < l; i++) {
+                    char org = ca[i];
+                    for (char c = 'a'; c <= 'z'; c++) {
+                        ca[i] = c;
+                        String candidate = String.valueOf(ca);
+                        if (q2.contains(candidate)) return step + 1;
+                        if (!dict.contains(candidate)) continue;
+                        // System.out.println(candidate);
+                        dict.remove(candidate);
+                        tmp.add(candidate);
                     }
-                    if (wordSet.contains(newWord) && !map.containsKey(newWord)) { //如果新单词在set中，但是没有访问过
-                        map.put(newWord, path + 1); //记录单词对应的路径长度
-                        queue.offer(newWord);//加入队尾
-                    }
+                    ca[i] = org;
                 }
             }
+            q1 = tmp;
         }
-        return 0; //未找到
+
+        return 0;
     }
 }
 // @lc code=end

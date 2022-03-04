@@ -7,19 +7,24 @@
 // @lc code=start
 class Solution {
     public int maxSubArray(int[] nums) {
-        if (nums.length == 1){
-            return nums[0];
-        }
-        int sum = Integer.MIN_VALUE;
-        int count = 0;
-        for (int i = 0; i < nums.length; i++){
-            count += nums[i];
-            sum = Math.max(sum, count); // 取区间累计的最大值（相当于不断确定最大子序终止位置）
-            if (count <= 0){
-                count = 0; // 相当于重置最大子序起始位置，因为遇到负数一定是拉低总和
+        // dp[i] = 
+        int n = nums.length;
+        if (0 == n) return 0;
+        // int[] dp = new int[n];
+        int prev = 0;
+        int cur = 0;
+        // dp[0] = nums[0];
+        int ans = Integer.MIN_VALUE;
+        for (int i = 0; i < n; i++) {
+            if (prev > 0) {
+                cur = prev + nums[i];
+            } else {
+                cur = nums[i];
             }
+            ans = Math.max(ans, cur);
+            prev = cur;
         }
-       return sum;
+        return ans;
     }
 }
 // @lc code=end

@@ -8,31 +8,25 @@ import java.util.List;
 
 // @lc code=start
 class Solution {
-    private int visited = 1;
-    boolean[] enterable;
-
+    private boolean[] visited;
+    private int accessible = 1;
 
     public boolean canVisitAllRooms(List<List<Integer>> rooms) {
-        enterable = new boolean[rooms.size()];
-        enterable[0] = true;
-        return visit(rooms, 0);
+        visited = new boolean[rooms.size()];
+        visited[0] = true;
+        visit(rooms, 0);
+        return accessible == rooms.size();
     }
 
-    private boolean visit(List<List<Integer>> rooms, int room) {
-        if (visited == rooms.size()) {
-            return true;
-        }
-        List<Integer> keys = rooms.get(room);
-        for (Integer key : keys) {
-            if (!enterable[key]) {
-                visited++;
-                enterable[key] = true;
-                if (visit(rooms, key)) {
-                    return true;
-                }
+    private void visit(List<List<Integer>> rooms, int r) {
+        for (Integer key : rooms.get(r)) {
+            if (!visited[key]) {
+                // System.out.println(key);
+                visited[key] = true;
+                accessible++;
+                visit(rooms, key);
             }
         }
-        return false;
     }
 }
 // @lc code=end

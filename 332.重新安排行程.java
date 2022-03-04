@@ -1,12 +1,4 @@
 import java.util.ArrayList;
-<<<<<<< HEAD
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.stream.Collectors;
-=======
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -18,7 +10,6 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeMap;
->>>>>>> cb5f86a (add solutions from home PC)
 
 /*
  * @lc app=leetcode.cn id=332 lang=java
@@ -28,47 +19,40 @@ import java.util.TreeMap;
 
 // @lc code=start
 class Solution {
-    private Deque<String> res;
-    private Map<String, Map<String, Integer>> map;
+    private Map<String, Map<String, Integer>> map = new HashMap<>();
+    private List<String> ans = new ArrayList<>();
+    // private List<String> tmp = new ArrayList<>();
+    private int n;
 
-    private boolean backTracking(int ticketNum){
-        if(res.size() == ticketNum + 1){
+    public List<String> findItinerary(List<List<String>> tickets) {
+        n = tickets.size();
+        for (List<String> l : tickets) {
+            map.putIfAbsent(l.get(0), new TreeMap<>());
+            map.get(l.get(0)).compute(l.get(1), (k, v) -> v == null ? 1 : v  + 1);
+        }
+        // System.out.println(map.toString());
+        ans.add("JFK");
+        backtracking("JFK");
+        return ans;
+    }
+
+    private boolean backtracking(String cur) {
+        if (ans.size() == n + 1) {
             return true;
         }
-        String last = res.getLast();
-        if(map.containsKey(last)){//防止出现null
-            for(Map.Entry<String, Integer> target : map.get(last).entrySet()){
-                int count = target.getValue();
-                if(count > 0){
-                    res.add(target.getKey());
-                    target.setValue(count - 1);
-                    if(backTracking(ticketNum)) return true;
-                    res.removeLast();
-                    target.setValue(count);
-                }
+        if (!map.containsKey(cur)) return false;
+        for (Map.Entry<String, Integer> e : map.get(cur).entrySet()) {
+            if (e.getValue() > 0) {
+                // map.get(cur).compute(e.getKey(), (k, v) -> --v);
+                e.setValue(e.getValue() - 1);
+                ans.add(e.getKey());
+                if (backtracking(e.getKey())) return true;
+                ans.remove(ans.size() - 1);
+                // map.get(cur).compute(e.getKey(), (k, v) -> ++v);
+                e.setValue(e.getValue() + 1);
             }
         }
         return false;
-    }
-
-    public List<String> findItinerary(List<List<String>> tickets) {
-        map = new HashMap<String, Map<String, Integer>>();
-        res = new LinkedList<>();
-        for(List<String> t : tickets){
-            Map<String, Integer> temp;
-            if(map.containsKey(t.get(0))){
-                temp = map.get(t.get(0));
-                temp.put(t.get(1), temp.getOrDefault(t.get(1), 0) + 1);
-            }else{
-                temp = new TreeMap<>();//升序Map
-                temp.put(t.get(1), 1);
-            }
-            map.put(t.get(0), temp);
-
-        }
-        res.add("JFK");
-        backTracking(tickets.size());
-        return new ArrayList<>(res);
     }
 }
 // @lc code=end
